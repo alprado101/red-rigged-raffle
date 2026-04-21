@@ -4,8 +4,8 @@
 //   \ V /  __/ |  | | (_) \__ \ |_| | | | | (_| |
 //    \_/ \___|_|  |_|\___/|___/\__,_|_| |_|\__, |
 
-import { AbsneakenderHase } from "./absneakender_hase.ts";
-import { GewinnbarerHase } from "./gewinnbarer_hase.ts";
+import { RaffleEingine } from "./absneakender_hase.ts";
+import { PossibleWinner } from "./gewinnbarer_hase.ts";
 
 export class Verlosung {
   //  __________________________________
@@ -82,20 +82,17 @@ export class Verlosung {
       "@PrinzPuma",
     ];
     const fiktivePreise = [
-      new GewinnbarerHase("iPhone 17 Pro", 1),
-      new GewinnbarerHase("Trip nach Dubi", 1),
-      new GewinnbarerHase("Stepper nach Isti", 1),
-      new GewinnbarerHase("Flug nach Zypi", 1),
-      new GewinnbarerHase("10 kg Haribo", 2),
-      new GewinnbarerHase("PlayStation 5 Slim", 3),
-      new GewinnbarerHase("gebrauchte Sneaker", 5),
+      new PossibleWinner("iPhone 17 Pro", 1),
+      new PossibleWinner("Trip nach Dubi", 1),
+      new PossibleWinner("Stepper nach Isti", 1),
+      new PossibleWinner("Flug nach Zypi", 1),
+      new PossibleWinner("10 kg Haribo", 2),
+      new PossibleWinner("PlayStation 5 Slim", 3),
+      new PossibleWinner("gebrauchte Sneaker", 5),
     ];
-    const luckyMuckies = new AbsneakenderHase(
-      redArmy,
-      fiktivePreise,
-    ).absneaken();
-    for (const [opfer, gewonnenerHase] of luckyMuckies.entries()) {
-      console.log(`${opfer} gewinnt ${gewonnenerHase}`);
+    const players = new RaffleEingine(redArmy, fiktivePreise).drawWinners();
+    for (const [winner, preis] of players.entries()) {
+      console.log(`${winner} gewinnt ${preis}`);
     }
   }
 }
